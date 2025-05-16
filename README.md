@@ -13,5 +13,5 @@ Correct rotation of the body and wheels have been implemented.
 
 #### May 16th
 Finished project. Fixed correct translation of body and turret. Made the legs swing back and forwards when walking.
-![Robot after transformation](image-1.png)
+![Robot after transformation](image-1.png) \n
 [Finished project demo](https://drive.google.com/file/d/1_e8OWIV822ACsRMCcvrLO8qy93UF26i5/view?usp=sharing)
