@@ -50,6 +50,7 @@ public class TankController : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
 
         Transform[] children = GetComponentsInChildren<Transform>();
+        // Adding the tank parts to the appropriate lists
         for (var i = 0; i < children.Length; i++)
         {
             if (children[i].name.Contains("rwheel1"))
@@ -124,17 +125,7 @@ public class TankController : MonoBehaviour
                 }
             }
         }
-        // store the original position and rotation of the wheels
-        foreach (GameObject wheel in m_wheels)
-        {
-            m_OriginalWheelPositions.Add(wheel.transform.localPosition);
-            m_OriginalWheelRotations.Add(wheel.transform.localRotation);
-        }
-        // store the original position and rotation of the turret
-        m_OriginalTurretPosition = m_turret.transform.localPosition;
-        m_OriginalTurretRotation = m_turret.transform.localRotation;
     }
-
     // Start is called before the first frame update
     private void Start()
     {
@@ -317,6 +308,7 @@ public class TankController : MonoBehaviour
             endPositions.Add(part.transform.position + Vector3.up * 1f); // Move up 1 unit
         }
 
+        // Move all parts up to their new positions
         float moveAmount = 1f; // seconds
         float moveElapsed = 0f;
         while (moveElapsed < moveAmount)
@@ -335,11 +327,13 @@ public class TankController : MonoBehaviour
             yield return null;
         }
 
+        // Reset all wheels to their original rotation
         foreach (GameObject part in m_wheels)
         {
             part.transform.localRotation = Quaternion.identity;
         }
 
+        // Rotate the tank parts to their new positions
         while (true)
         {
             float maxAngle = 0f;
@@ -379,6 +373,7 @@ public class TankController : MonoBehaviour
         List<Vector3> startPositions2 = new List<Vector3>();
         List<Vector3> endPositions2 = new List<Vector3>();
 
+        // Get the start and end positions for the body parts
         foreach (var part in m_body)
         {
             startPositions2.Add(part.transform.position);
@@ -388,6 +383,7 @@ public class TankController : MonoBehaviour
         float moveDuration2 = 1f; // seconds
         float moveElapsed2 = 0f;
 
+        // Move all body parts up to their new positions
         while (moveElapsed2 < moveDuration2)
         {
             moveElapsed2 += Time.deltaTime;
@@ -408,6 +404,7 @@ public class TankController : MonoBehaviour
         List<Vector3> turretStartPositions = new List<Vector3>();
         List<Vector3> turretEndPositions = new List<Vector3>();
 
+        // Move the turret parts up
         foreach (var part in m_turretParts)
         {
             turretStartPositions.Add(part.transform.position);
@@ -416,6 +413,8 @@ public class TankController : MonoBehaviour
 
         float moveDuration3 = 1f; // seconds
         float moveElapsed3 = 0f;
+
+        // Move all turret parts up to their new positions
         while (moveElapsed3 < moveDuration3)
         {
             moveElapsed3 += Time.deltaTime;
